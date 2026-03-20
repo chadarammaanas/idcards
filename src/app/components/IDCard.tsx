@@ -124,43 +124,53 @@ const RichBackground = ({ role, color, lightColor }: { role: string; color: stri
         opacity: 0.6, filter: "blur(40px)"
       }} />
 
-      {/* Abstract Waves/Shapes based on role */}
+      {/* Indian-inspired motif layer + role surface */}
       <svg width="100%" height="100%" viewBox="0 0 300 480" preserveAspectRatio="none" style={{ position: "absolute", bottom: 0 }}>
-        {role === "Coordinators" && (
+        <defs>
+          <pattern id="jaali-pattern" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke={`${color}22`} strokeWidth="1" />
+            <circle cx="12" cy="12" r="1.8" fill={`${color}33`} />
+          </pattern>
+        </defs>
+
+        {/* Temple-jaali strip */}
+        <rect x="0" y="0" width="300" height="32" fill="url(#jaali-pattern)" opacity="0.55" />
+
+        {/* Rangoli corner arcs */}
+        <circle cx="20" cy="460" r="46" fill="none" stroke={`${color}2a`} strokeWidth="10" />
+        <circle cx="30" cy="458" r="22" fill="none" stroke={`${AP_SAFFRON}33`} strokeWidth="6" />
+        <circle cx="282" cy="24" r="36" fill="none" stroke={`${color}1f`} strokeWidth="8" />
+
+        {/* Lotus petal hints */}
+        <path d="M140 448 Q150 424 160 448 Q150 438 140 448 Z" fill={`${color}28`} />
+        <path d="M126 452 Q138 428 150 452 Q138 444 126 452 Z" fill={`${AP_SAFFRON}20`} />
+        <path d="M150 452 Q162 428 174 452 Q162 444 150 452 Z" fill={`${AP_SAFFRON}20`} />
+
+        {/* Role-specific base forms */}
+        {(role === "Volunteer" || role === "Organizing Committee" || role === "Sanchalana Samithi") && (
           <>
-            <path d="M0,480 L0,350 Q75,300 150,380 T300,320 L300,480 Z" fill={`${color}1A`} />
-            <path d="M0,480 L0,400 Q100,370 200,430 T300,390 L300,480 Z" fill={`${color}2A`} />
-            <circle cx="250" cy="150" r="80" fill="none" stroke={`${color}22`} strokeWidth="40" opacity="0.5" />
-            <circle cx="50" cy="350" r="40" fill="none" stroke={`${AP_TEAL}22`} strokeWidth="15" />
+            <polygon points="0,480 0,350 150,422 300,300 300,480" fill={`${color}18`} />
+            <polygon points="0,480 0,420 180,480" fill={`${color}2a`} />
+            <path d="M-40,210 L160,0 M-30,238 L188,0 M208,480 L400,286" stroke={`${color}16`} strokeWidth="16" opacity="0.65" />
           </>
         )}
-        {role === "Organiser" && (
+
+        {(role === "Participant" || role === "Technical Support") && (
           <>
-            <polygon points="0,480 0,350 150,420 300,300 300,480" fill={`${color}1A`} />
-            <polygon points="0,480 0,420 180,480" fill={`${color}33`} />
-            <polygon points="300,480 300,380 200,480" fill={`${AP_SAFFRON}22`} />
-            {/* Action slashes */}
-            <path d="M-50,200 L150,0 M-50,230 L180,0 M200,480 L400,280" stroke={`${color}15`} strokeWidth="20" opacity="0.6" />
+            <path d="M0,480 L0,304 Q150,452 300,252 L300,480 Z" fill={`${color}18`} />
+            <path d="M0,102 L100,102 L150,52 M100,102 L100,202 L50,252 M300,302 L250,302 L200,352 L200,480" fill="none" stroke={`${color}24`} strokeWidth="2.5" />
+            <rect x="140" y="40" width="18" height="18" rx="4" fill={`${color}20`} />
+            <rect x="42" y="242" width="18" height="18" rx="4" fill={`${color}20`} />
           </>
         )}
-        {role === "delegate" && (
+
+        {(role === "Guest" || role === "Jury / Judge" || role === "Speaker / Resource" || role === "Media / Photography") && (
           <>
-            <path d="M0,480 L0,300 Q150,450 300,250 L300,480 Z" fill={`${color}1A`} />
-            {/* Tech grid / circuits */}
-            <path d="M0,100 L100,100 L150,50 M100,100 L100,200 L50,250 M300,300 L250,300 L200,350 L200,480" fill="none" stroke={`${color}22`} strokeWidth="3" />
-            <rect x="140" y="40" width="20" height="20" rx="4" fill={`${color}22`} />
-            <rect x="40" y="240" width="20" height="20" rx="4" fill={`${color}22`} />
-            <circle cx="250" cy="300" r="10" fill={`${AP_TEAL}33`} />
-          </>
-        )}
-        {role === "Guest" && (
-          <>
-            {/* Elegant overlapping circles */}
-            <circle cx="0" cy="480" r="200" fill={`${color}11`} />
-            <circle cx="0" cy="480" r="140" fill={`${color}1A`} />
-            <circle cx="300" cy="0" r="150" fill={`${color}0A`} />
-            <circle cx="300" cy="0" r="100" fill={`${AP_SAFFRON}15`} />
-            <path d="M0,480 Q150,350 300,480 Z" fill={`${color}22`} />
+            <circle cx="0" cy="480" r="194" fill={`${color}10`} />
+            <circle cx="0" cy="480" r="138" fill={`${color}1a`} />
+            <circle cx="300" cy="0" r="148" fill={`${color}0a`} />
+            <circle cx="300" cy="0" r="96" fill={`${AP_SAFFRON}13`} />
+            <path d="M0,480 Q150,352 300,480 Z" fill={`${color}21`} />
           </>
         )}
       </svg>
@@ -171,52 +181,58 @@ const RichBackground = ({ role, color, lightColor }: { role: string; color: stri
 // ── DECORATIVE BACKGROUNDS BY ROLE ──
 const RoleBackground = ({ role, color, side }: { role: string; color: string; side: "front" | "back" }) => {
   const isFront = side === "front";
-  const opac = isFront ? 0.25 : 0.15; // Increased visibility of icons
-  
-  if (role === "Coordinators") {
+  const opac = isFront ? 0.24 : 0.14;
+
+  const iconStyle = {
+    filter: "drop-shadow(0 10px 10px rgba(0,0,0,0.08))",
+  } as const;
+
+  if (role === "Participant") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(240px, ${isFront ? 320 : 100}px)`, display: 'block', position: 'absolute' }}>
-          <ClipboardCheck size={100} color={color} strokeWidth={1} style={{ filter: "drop-shadow(0 10px 10px rgba(0,0,0,0.1))" }} />
-        </g>
-        <g style={{ transform: `translate(-10px, ${isFront ? 260 : 350}px)`, display: 'block', position: 'absolute' }}>
-          <Users size={140} color={color} strokeWidth={1} />
-        </g>
-        <g style={{ transform: `translate(150px, ${isFront ? 50 : 380}px)`, display: 'block', position: 'absolute' }}>
-          <Zap size={80} color={color} strokeWidth={1.5} />
-        </g>
+        <g style={{ transform: `translate(215px, ${isFront ? 304 : 102}px)`, display: "block", position: "absolute" }}><Hexagon size={108} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-6px, ${isFront ? 266 : 358}px)`, display: "block", position: "absolute" }}><Network size={124} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(165px, ${isFront ? 84 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={78} color={color} strokeWidth={1.5} /></g>
       </div>
     );
   }
 
-  if (role === "Organiser") {
+  if (role === "Volunteer") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(210px, ${isFront ? 330 : 80}px)`, display: 'block', position: 'absolute' }}>
-          <Megaphone size={110} color={color} strokeWidth={1} style={{ filter: "drop-shadow(0 10px 10px rgba(0,0,0,0.1))" }} />
-        </g>
-        <g style={{ transform: `translate(-30px, ${isFront ? 280 : 370}px)`, display: 'block', position: 'absolute' }}>
-          <Tent size={140} color={color} strokeWidth={1} />
-        </g>
-        <g style={{ transform: `translate(160px, ${isFront ? 80 : 380}px)`, display: 'block', position: 'absolute' }}>
-          <Activity size={100} color={color} strokeWidth={1.5} />
-        </g>
+        <g style={{ transform: `translate(210px, ${isFront ? 316 : 88}px)`, display: "block", position: "absolute" }}><Users size={106} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-10px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><HeartPulse size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(162px, ${isFront ? 70 : 382}px)`, display: "block", position: "absolute" }}><Flag size={74} color={color} strokeWidth={1.6} /></g>
       </div>
     );
   }
 
-  if (role === "delegate") {
+  if (role === "Organizing Committee") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(210px, ${isFront ? 300 : 100}px)`, display: 'block', position: 'absolute' }}>
-          <Hexagon size={120} color={color} strokeWidth={1} style={{ filter: "drop-shadow(0 10px 10px rgba(0,0,0,0.1))" }} />
-        </g>
-        <g style={{ transform: `translate(-10px, ${isFront ? 260 : 360}px)`, display: 'block', position: 'absolute' }}>
-          <Network size={130} color={color} strokeWidth={1} />
-        </g>
-        <g style={{ transform: `translate(160px, ${isFront ? 280 : 380}px)`, display: 'block', position: 'absolute' }}>
-          <Lightbulb size={90} color={color} strokeWidth={1.5} />
-        </g>
+        <g style={{ transform: `translate(212px, ${isFront ? 324 : 82}px)`, display: "block", position: "absolute" }}><Megaphone size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-20px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Tent size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(166px, ${isFront ? 72 : 385}px)`, display: "block", position: "absolute" }}><ClipboardCheck size={74} color={color} strokeWidth={1.5} /></g>
+      </div>
+    );
+  }
+
+  if (role === "Sanchalana Samithi") {
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+        <g style={{ transform: `translate(212px, ${isFront ? 324 : 82}px)`, display: "block", position: "absolute" }}><Activity size={104} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-20px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><GitMerge size={122} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(168px, ${isFront ? 72 : 386}px)`, display: "block", position: "absolute" }}><ListTodo size={72} color={color} strokeWidth={1.6} /></g>
+      </div>
+    );
+  }
+
+  if (role === "Jury / Judge") {
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+        <g style={{ transform: `translate(212px, ${isFront ? 320 : 76}px)`, display: "block", position: "absolute" }}><Award size={100} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-10px, ${isFront ? 286 : 365}px)`, display: "block", position: "absolute" }}><Briefcase size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></g>
       </div>
     );
   }
@@ -224,15 +240,39 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Guest") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(210px, ${isFront ? 320 : 60}px)`, display: 'block', position: 'absolute' }}>
-          <Crown size={100} color={color} strokeWidth={1} style={{ filter: "drop-shadow(0 10px 10px rgba(0,0,0,0.1))" }} />
-        </g>
-        <g style={{ transform: `translate(10px, ${isFront ? 280 : 360}px)`, display: 'block', position: 'absolute' }}>
-          <Award size={120} color={color} strokeWidth={1} />
-        </g>
-        <g style={{ transform: `translate(130px, ${isFront ? 50 : 380}px)`, display: 'block', position: 'absolute' }}>
-          <Sparkles size={100} color={color} strokeWidth={1.5} />
-        </g>
+        <g style={{ transform: `translate(212px, ${isFront ? 320 : 66}px)`, display: "block", position: "absolute" }}><Crown size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(8px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><Award size={114} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(164px, ${isFront ? 66 : 382}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></g>
+      </div>
+    );
+  }
+
+  if (role === "Speaker / Resource") {
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Mic size={98} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={122} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(168px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Headphones size={70} color={color} strokeWidth={1.6} /></g>
+      </div>
+    );
+  }
+
+  if (role === "Media / Photography") {
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Activity size={98} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><MapPin size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Zap size={70} color={color} strokeWidth={1.6} /></g>
+      </div>
+    );
+  }
+
+  if (role === "Technical Support") {
+    return (
+      <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Map size={96} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Network size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={70} color={color} strokeWidth={1.6} /></g>
       </div>
     );
   }
