@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import * as htmlToImage from "html-to-image";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 import { IDCard, IDCardBack } from "./components/IDCard";
 import srujanLogo from "../../logo/Screenshot 2026-03-20 at 10-39-21 (104) WhatsApp.png";
 import apLogo from "../../logo/WhatsApp Image 2026-03-20 at 10.35.58 AM.jpeg";
@@ -48,7 +50,9 @@ const roleLightBg: Record<string, string> = {
 
 const filters = ["All", ...ROLES_LIST];
 
-const DownloadableCard = ({ card }: { card: any }) => {
+const toSafeFilePart = (value: string) => value.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+
+const DownloadableCard = ({ card, index }: { card: any; index: number }) => {
   const cardRefFront = useRef<HTMLDivElement>(null);
   const cardRefBack = useRef<HTMLDivElement>(null);
 
@@ -83,7 +87,11 @@ const DownloadableCard = ({ card }: { card: any }) => {
         {/* Front */}
         <div className="flex flex-col gap-3">
           <div className="relative group">
-            <div ref={cardRefFront} className="bg-white rounded-2xl p-0 shadow-lg">
+            <div
+              ref={cardRefFront}
+              className="bg-white rounded-2xl p-0 shadow-lg"
+              data-export-id={`${toSafeFilePart(card.role)}-${index}-front`}
+            >
               <IDCard 
                 role={card.role} 
                 organization={card.organization}
@@ -103,7 +111,11 @@ const DownloadableCard = ({ card }: { card: any }) => {
         {/* Back */}
         <div className="flex flex-col gap-3">
           <div className="relative group">
-            <div ref={cardRefBack} className="bg-white rounded-2xl p-0 shadow-lg">
+            <div
+              ref={cardRefBack}
+              className="bg-white rounded-2xl p-0 shadow-lg"
+              data-export-id={`${toSafeFilePart(card.role)}-${index}-back`}
+            >
               <IDCardBack 
                 role={card.role} 
                 organization={card.organization}
@@ -127,15 +139,61 @@ const DownloadableCard = ({ card }: { card: any }) => {
 
 function App() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [isExportingAll, setIsExportingAll] = useState(false);
 
   const filteredCards = activeFilter === "All" 
     ? cards 
     : cards.filter(card => card.role === activeFilter);
 
   const downloadAllFiltered = async () => {
-    // Collect all buttons on page to trigger them, or we could handle it via refs.
-    // For simplicity, doing it manually is better, but as a bulk tool, user can click individual.
-    alert("Please download cards individually using the buttons below each card for highest quality.");
+    if (isExportingAll) return;
+
+    try {
+      setIsExportingAll(true);
+      const zip = new JSZip();
+      let fileCount = 0;
+
+      for (let i = 0; i < filteredCards.length; i += 1) {
+        const card = filteredCards[i];
+        const roleSafe = toSafeFilePart(card.role);
+
+        for (const side of ["front", "back"] as const) {
+          const node = document.querySelector(
+            `[data-export-id="${roleSafe}-${i}-${side}"]`,
+          ) as HTMLElement | null;
+
+          if (!node) continue;
+
+          const dataUrl = await htmlToImage.toPng(node, {
+            pixelRatio: 4,
+            cacheBust: false,
+            fontEmbedCSS: "",
+            style: {
+              transform: "scale(1)",
+              transformOrigin: "top left",
+            },
+          });
+
+          const base64 = dataUrl.split(",")[1];
+          zip.file(`${roleSafe}_${side}.png`, base64, { base64: true });
+          fileCount += 1;
+        }
+      }
+
+      if (fileCount === 0) {
+        alert("No visible cards found to export.");
+        return;
+      }
+
+      const blob = await zip.generateAsync({ type: "blob" });
+      const filterSafe = toSafeFilePart(activeFilter);
+      saveAs(blob, `Srujana_ID_Cards_${filterSafe || "All"}.zip`);
+    } catch (error) {
+      console.error("Failed to export visible cards", error);
+      alert("Failed to export cards. Please try again.");
+    } finally {
+      setIsExportingAll(false);
+    }
   };
 
   return (
@@ -155,9 +213,10 @@ function App() {
             
             <button 
               onClick={downloadAllFiltered}
+              disabled={isExportingAll}
               className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"
             >
-              Export Visible
+              {isExportingAll ? "Preparing ZIP..." : "Export Visible (ZIP)"}
             </button>
           </div>
           
@@ -198,7 +257,7 @@ function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
           {filteredCards.map((card, index) => (
-            <DownloadableCard key={`${card.role}-${index}`} card={card} />
+            <DownloadableCard key={`${card.role}-${index}`} card={card} index={index} />
           ))}
         </div>
       </div>
