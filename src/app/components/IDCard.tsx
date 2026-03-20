@@ -9,49 +9,94 @@ import srujanLogo from "../../../logo/Screenshot 2026-03-20 at 10-39-21 (104) Wh
 import apLogo from "../../../logo/WhatsApp Image 2026-03-20 at 10.35.58 AM.jpeg";
 
 export interface IDCardProps {
-  role: "Coordinators" | "Organiser" | "delegate" | "Guest";
+  role: "Participant" | "Volunteer" | "Organizing Committee" | "Sanchalana Samithi" | "Jury / Judge" | "Guest" | "Speaker / Resource" | "Media / Photography" | "Technical Support" | string;
   organization: string;
   idNumber: string;
   eventDate: string;
 }
 
-const roleConfig = {
-  Coordinators: {
-    accent: "#16a34a",
-    accentLight: "#dcfce7",
-    accentMid: "#4ade80",
-    accentDark: "#14532d",
-    label: "COORDINATOR",
-    labelTelugu: "సమన్వయకర్త",
-    gradient: "linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%)",
-  },
-  Organiser: {
-    accent: "#b91c1c",
-    accentLight: "#fee2e2",
-    accentMid: "#f87171",
-    accentDark: "#7f1d1d",
-    label: "ORGANISER",
-    labelTelugu: "నిర్వాహకుడు",
-    gradient: "linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%)",
-  },
-  delegate: {
-    accent: "#1B4B8C",
+const roleConfig: Record<string, any> = {
+  "Participant": {
+    accent: "#2563eb",
     accentLight: "#dbeafe",
     accentMid: "#60a5fa",
     accentDark: "#1e3a8a",
-    label: "DELEGATE",
-    labelTelugu: "ప్రతినిధి",
-    gradient: "linear-gradient(135deg, #1e3a8a 0%, #1B4B8C 50%, #2563eb 100%)",
+    label: "PARTICIPANT",
+    labelTelugu: "పాల్గొనేవారు",
+    gradient: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%)",
   },
-  Guest: {
-    accent: "#b45309",
+  "Volunteer": {
+    accent: "#65a30d",
+    accentLight: "#ecfccb",
+    accentMid: "#a3e635",
+    accentDark: "#365314",
+    label: "VOLUNTEER",
+    labelTelugu: "స్వచ్ఛంద సేవకుడు",
+    gradient: "linear-gradient(135deg, #3f6212 0%, #65a30d 50%, #84cc16 100%)",
+  },
+  "Organizing Committee": {
+    accent: "#dc2626",
+    accentLight: "#fee2e2",
+    accentMid: "#f87171",
+    accentDark: "#7f1d1d",
+    label: "COMMITTEE",
+    labelTelugu: "నిర్వహణ కమిటీ",
+    gradient: "linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #ef4444 100%)",
+  },
+  "Sanchalana Samithi": {
+    accent: "#9333ea",
+    accentLight: "#f3e8ff",
+    accentMid: "#c084fc",
+    accentDark: "#581c87",
+    label: "SANCHALANA",
+    labelTelugu: "సంచలన సమితి",
+    gradient: "linear-gradient(135deg, #6b21a8 0%, #9333ea 50%, #a855f7 100%)",
+  },
+  "Jury / Judge": {
+    accent: "#ca8a04",
+    accentLight: "#fefce8",
+    accentMid: "#facc15",
+    accentDark: "#713f12",
+    label: "JURY PANEL",
+    labelTelugu: "న్యాయ నిర్ణేత",
+    gradient: "linear-gradient(135deg, #854d0e 0%, #ca8a04 50%, #eab308 100%)",
+  },
+  "Guest": {
+    accent: "#d97706",
     accentLight: "#fef3c7",
     accentMid: "#fbbf24",
     accentDark: "#78350f",
     label: "GUEST",
     labelTelugu: "అతిథి",
-    gradient: "linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%)",
+    gradient: "linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%)",
   },
+  "Speaker / Resource": {
+    accent: "#0d9488",
+    accentLight: "#ccfbf1",
+    accentMid: "#2dd4bf",
+    accentDark: "#115e59",
+    label: "SPEAKER",
+    labelTelugu: "వక్త",
+    gradient: "linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%)",
+  },
+  "Media / Photography": {
+    accent: "#db2777",
+    accentLight: "#fce7f3",
+    accentMid: "#f472b6",
+    accentDark: "#831843",
+    label: "MEDIA TEAM",
+    labelTelugu: "మీడియా తీమ్",
+    gradient: "linear-gradient(135deg, #9d174d 0%, #db2777 50%, #ec4899 100%)",
+  },
+  "Technical Support": {
+    accent: "#4f46e5",
+    accentLight: "#e0e7ff",
+    accentMid: "#818cf8",
+    accentDark: "#312e81",
+    label: "TECH SUPPORT",
+    labelTelugu: "సాంకేతిక బృందం",
+    gradient: "linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #6366f1 100%)",
+  }
 };
 
 const AP_TEAL = "#00B4CC";
@@ -364,7 +409,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
               <span style={{ flex: 1, height:14 }}></span>
             </div>
             <div style={{ borderBottom: `2px solid ${cfg.accentLight}`, paddingBottom: 6, display: "flex" }}>
-              <span style={{ fontSize: 8, fontWeight: 800, color: cfg.accentDark, width: 60, alignSelf:"flex-end" }}>COLLEGE</span>
+              <span style={{ fontSize: 8, fontWeight: 800, color: cfg.accentDark, width: 60, alignSelf:"flex-end" }}>ORGANISATION</span>
               <span style={{ flex: 1, height:14 }}></span>
             </div>
           </div>
@@ -415,23 +460,23 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
         <div style={{ width: 44, height: 12, borderRadius: 20, background: "rgba(255,255,255,0.7)", border: "1px solid rgba(0,0,0,0.1)", boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }} />
       </div>
 
-      <div style={{ flex: 1, padding: "10px 18px 14px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
+      <div style={{ flex: 1, padding: "8px 16px 10px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
         <RoleBackground role={role} color={cfg.accent} side="back" />
         
         {/* Info Box */}
         <div style={{ 
           textAlign: "center", position: "relative", zIndex: 3, 
-          background: "rgba(255,255,255,0.85)", padding: "16px", borderRadius: 16, 
+          background: "rgba(255,255,255,0.85)", padding: "14px", borderRadius: 16, 
           border: "1px solid rgba(255,255,255,1)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)", 
-          backdropFilter: "blur(12px)", marginBottom: 16 
+          backdropFilter: "blur(12px)", marginBottom: 10 
         }}>
-          <div style={{ display:"inline-flex", alignItems: "center", gap: 6, background: `linear-gradient(135deg, ${AP_SAFFRON}, #d97706)`, color: "#fff", padding: "5px 12px", borderRadius: 20, fontSize: 8, fontWeight: 800, letterSpacing: "0.1em", marginBottom: 10, boxShadow: "0 4px 12px rgba(232, 144, 42, 0.3)" }}>
+          <div style={{ display:"inline-flex", alignItems: "center", gap: 6, background: `linear-gradient(135deg, ${AP_SAFFRON}, #d97706)`, color: "#fff", padding: "4px 10px", borderRadius: 20, fontSize: 7.5, fontWeight: 800, letterSpacing: "0.1em", marginBottom: 8, boxShadow: "0 4px 12px rgba(232, 144, 42, 0.3)" }}>
             <Award size={10} strokeWidth={3} /> PRIZE POOL: ₹2 LAKHS
           </div>
           <div style={{ fontSize: 13, fontWeight: 900, color: AP_NAVY, letterSpacing: "0.05em", marginBottom: 6, lineHeight: 1.1 }}>
             ABOUT THE FEST
           </div>
-          <div style={{ fontSize: 9.5, color: "#334155", lineHeight: 1.5, fontWeight: 500 }}>
+          <div style={{ fontSize: 9, color: "#334155", lineHeight: 1.4, fontWeight: 500 }}>
             A State-Level Innovation & Technical Fest hosted at SVPEC. Guided by the vision: 
             <br/><br/>
             <strong style={{ color: cfg.accentDark, background: cfg.accentLight, padding: "2px 6px", borderRadius: 4, display: "inline-block" }}>
@@ -442,49 +487,99 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
 
         {/* QR Section */}
         <div style={{ 
-          flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", 
+          flex: "0 0 auto", minHeight: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", 
           position: "relative", zIndex: 3, background: `linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)`, 
           borderRadius: 16, border: `1px solid rgba(255,255,255,0.8)`, boxShadow: `0 4px 16px ${cfg.accent}15`,
-          backdropFilter: "blur(8px)"
+          backdropFilter: "blur(8px)", padding: "8px 0"
         }}>
-          <div style={{ fontSize: 11, fontWeight: 800, color: cfg.accentDark, letterSpacing: "0.15em", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ fontSize: 10.5, fontWeight: 800, color: cfg.accentDark, letterSpacing: "0.15em", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
             <div style={{ width: 8, height: 2, background: cfg.accentDark, borderRadius: 2 }} />
             EVENT ACCESS 
             <div style={{ width: 8, height: 2, background: cfg.accentDark, borderRadius: 2 }} />
           </div>
 
-          <div style={{ background: "#ffffff", padding: 12, borderRadius: 14, boxShadow: `0 12px 32px ${cfg.accent}30`, border: `2px solid ${cfg.accent}30` }}>
+          <div style={{ background: "#ffffff", padding: 10, borderRadius: 14, boxShadow: `0 12px 32px ${cfg.accent}30`, border: `2px solid ${cfg.accent}30` }}>
             <QRCode accent={AP_NAVY} />
           </div>
           
-          <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 14, background: "#ffffff", padding: "6px 14px", borderRadius: 12, border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, background: "#ffffff", padding: "5px 12px", borderRadius: 12, border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
             <Share2 size={12} color={AP_TEAL} strokeWidth={2.5} />
             <span style={{ fontSize: 8, fontWeight: 800, color: "#475569", letterSpacing: "0.08em" }}>SCAN FOR SCHEDULE</span>
           </div>
         </div>
 
         {/* Emergency/Contact Grid */}
-        <div style={{ marginTop: 16, position: "relative", zIndex: 3, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <div style={{ background: "rgba(255,255,255,0.9)", border: "1px solid #e2e8f0", padding: "10px", borderRadius: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
-              <div style={{ background: "#ffe4e6", padding: 4, borderRadius: 6 }}>
+        <div style={{ marginTop: 10, position: "relative", zIndex: 3, display: "grid", gridTemplateColumns: "0.92fr 1.08fr", gap: 8 }}>
+          <div
+            style={{
+              background: "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88))",
+              border: "1px solid #fecdd3",
+              padding: "8px 8px 7px",
+              borderRadius: 14,
+              boxShadow: "0 8px 18px rgba(225,29,72,0.08)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 7 }}>
+              <div style={{ background: "#ffe4e6", padding: 4, borderRadius: 7, border: "1px solid #fecdd3" }}>
                 <HeartPulse size={12} color="#e11d48" strokeWidth={2.5} />
               </div>
-              <div style={{ fontSize: 8, fontWeight: 900, color: "#e11d48", letterSpacing: "0.05em" }}>EMERGENCY</div>
+              <div style={{ fontSize: 8, fontWeight: 900, color: "#e11d48", letterSpacing: "0.06em" }}>EMERGENCY</div>
             </div>
-            <div style={{ borderBottom: "2px solid #f1f5f9", height: 16, marginBottom: 4 }}><span style={{ fontSize: 7, color:"#64748b", fontWeight: 700 }}>Blood Gp.</span></div>
-            <div style={{ borderBottom: "2px solid #f1f5f9", height: 16 }}><span style={{ fontSize: 7, color:"#64748b", fontWeight: 700 }}>Contact Ph.</span></div>
+
+            <div style={{ marginBottom: 5, border: "1px dashed #fecdd3", borderRadius: 8, padding: "4px 6px" }}>
+              <div style={{ fontSize: 6.8, color: "#be123c", fontWeight: 800, letterSpacing: "0.04em", marginBottom: 2 }}>BLOOD GROUP</div>
+              <div
+                style={{
+                  width: "100%",
+                  height: 12,
+                  borderBottom: "2px solid #cbd5e1",
+                  borderRadius: 1,
+                }}
+              />
+            </div>
+
+            <div style={{ border: "1px dashed #fecdd3", borderRadius: 8, padding: "4px 6px" }}>
+              <div style={{ fontSize: 6.8, color: "#be123c", fontWeight: 800, letterSpacing: "0.04em", marginBottom: 2 }}>EMERGENCY PHONE</div>
+              <div
+                style={{
+                  width: "100%",
+                  height: 12,
+                  borderBottom: "2px solid #cbd5e1",
+                  borderRadius: 1,
+                }}
+              />
+            </div>
           </div>
-          <div style={{ background: "rgba(255,255,255,0.9)", border: "1px solid #e2e8f0", padding: "10px", borderRadius: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.04)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
-              <div style={{ background: `${AP_NAVY}20`, padding: 4, borderRadius: 6 }}>
+
+          <div
+            style={{
+              background: "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88))",
+              border: `1px solid ${AP_NAVY}33`,
+              padding: "9px 10px 8px",
+              borderRadius: 14,
+              boxShadow: "0 8px 18px rgba(30,58,138,0.08)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 7 }}>
+              <div style={{ background: `${AP_NAVY}20`, padding: 4, borderRadius: 7, border: `1px solid ${AP_NAVY}30` }}>
                 <Briefcase size={12} color={AP_NAVY} strokeWidth={2.5} />
               </div>
-              <div style={{ fontSize: 8, fontWeight: 900, color: AP_NAVY, letterSpacing: "0.05em" }}>SUPPORT</div>
+              <div style={{ fontSize: 9, fontWeight: 900, color: AP_NAVY, letterSpacing: "0.06em" }}>HELP DESK</div>
             </div>
-            <div style={{ fontSize: 8, color: "#334155", fontWeight: 700, lineHeight: 1.5, marginTop: 4 }}>
-              +91 93919 05274<br/>
-              savishkarandhrapradesh<br/>@gmail.com
+
+            <div style={{ fontSize: 8.8, color: "#1e293b", fontWeight: 800, lineHeight: 1.45 }}>
+              +91 93919 05274
+            </div>
+            <div style={{
+              marginTop: 5,
+              fontSize: 7.8,
+              color: "#334155",
+              fontWeight: 700,
+              lineHeight: 1.4,
+              wordBreak: "break-word",
+              overflowWrap: "anywhere",
+            }}>
+              savishkarandhrapradesh@gmail.com
             </div>
           </div>
         </div>
