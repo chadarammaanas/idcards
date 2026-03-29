@@ -611,10 +611,21 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
             INSPIRATION
           </div>
           <div style={{ fontSize: 8.5, color: "#1f2937", lineHeight: 1.45, fontWeight: 700 }}>
-            "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action."
+            "If you want to shine like a sun, first burn like a sun"
           </div>
           <div style={{ marginTop: 6, fontSize: 7.5, color: "#475569", fontWeight: 800, letterSpacing: "0.05em" }}>
             - Dr. A.P.J. Abdul Kalam
+          </div>
+
+          <div style={{ marginTop: 8, height: 1, background: `${cfg.accent}33` }} />
+          <div style={{ marginTop: 7, display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ background: `${cfg.accent}1f`, border: `1px solid ${cfg.accent}33`, borderRadius: 6, padding: 3, display: "flex" }}>
+              <HeartPulse size={11} color={cfg.accentDark} strokeWidth={2.4} />
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: 7, color: cfg.accentDark, fontWeight: 900, letterSpacing: "0.06em" }}>HELP / EMERGENCY</div>
+              <div style={{ fontSize: 8.2, color: "#1e293b", fontWeight: 800 }}>+91 93919 05274</div>
+            </div>
           </div>
         </div>
 
