@@ -50,12 +50,12 @@ const roleConfig: Record<string, any> = {
     gradient: "linear-gradient(135deg, #3f6212 0%, #65a30d 50%, #84cc16 100%)",
   },
   "Organizing Committee": {
-    accent: "#dc2626",
-    accentLight: "#fee2e2",
-    accentMid: "#f87171",
-    accentDark: "#7f1d1d",
-    label: "COMMITTEE",
-    gradient: "linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #ef4444 100%)",
+    accent: "#7c3aed",
+    accentLight: "#ede9fe",
+    accentMid: "#a78bfa",
+    accentDark: "#4c1d95",
+    label: "ORGANISATION COMMITTEE",
+    gradient: "linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #8b5cf6 100%)",
   },
   "Sanchalana Samithi": {
     accent: "#9333ea",
@@ -218,9 +218,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Organizing Committee") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 324 : 82}px)`, display: "block", position: "absolute" }}><Megaphone size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-20px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Tent size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(166px, ${isFront ? 72 : 385}px)`, display: "block", position: "absolute" }}><ClipboardCheck size={74} color={color} strokeWidth={1.5} /></g>
+        <g style={{ transform: `translate(212px, ${isFront ? 322 : 78}px)`, display: "block", position: "absolute" }}><Network size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
+        <g style={{ transform: `translate(-18px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={118} color={color} strokeWidth={1} /></g>
+        <g style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.5} /></g>
       </div>
     );
   }
@@ -337,6 +337,8 @@ const QRCode = ({ accent }: { accent: string }) => {
 // ── FRONT OF CARD ──
 export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel, fields }) => {
   const cfg = roleConfig[role] || roleConfig["Participant"];
+  const roleLabel = displayRoleLabel || cfg.label;
+  const isLongRoleLabel = roleLabel.length > 14;
   const detailFields = fields && fields.length > 0
     ? fields
     : [
@@ -371,8 +373,8 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
           <div style={{ width: 44, height: 12, borderRadius: 20, background: "rgba(255,255,255,0.9)", border: "2px solid rgba(255,255,255,0.5)", boxShadow: "inset 0 1px 3px rgba(0,0,0,0.3)" }} />
         </div>
         <div style={{ textAlign: "center", padding: "10px 16px 14px", position: "relative", zIndex: 2 }}>
-          <div style={{ color: "#ffffff", fontSize: 20, fontWeight: 900, letterSpacing: "0.25em", textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
-            {displayRoleLabel || cfg.label}
+          <div style={{ color: "#ffffff", fontSize: isLongRoleLabel ? 13 : 20, fontWeight: 900, letterSpacing: isLongRoleLabel ? "0.08em" : "0.25em", textShadow: "0 2px 4px rgba(0,0,0,0.3)", lineHeight: isLongRoleLabel ? 1.2 : 1 }}>
+            {roleLabel}
           </div>
         </div>
       </div>
@@ -384,14 +386,14 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
       </div>
 
       {/* BODY */}
-      <div style={{ flex: 1, padding: isDenseLayout ? "10px 14px" : "12px 18px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
+      <div style={{ flex: 1, padding: isDenseLayout ? "10px 14px" : "12px 18px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2, gap: isDenseLayout ? 6 : 8, overflow: "hidden" }}>
         <RoleBackground role={role} color={cfg.accent} side="front" />
 
         {/* Logos & Event Theme */}
         <div style={{ 
             background: "rgba(255,255,255,0.6)", padding: "6px", borderRadius: 12, backdropFilter: "blur(8px)",
             border: "1px solid rgba(255,255,255,0.8)", boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-            display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 2, marginBottom: 8 
+          display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 2, flexShrink: 0
         }}>
           <div style={{ padding: 2, background: "#fff", borderRadius: 8, boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }}>
             <img src={apLogo} alt="AP Saviskar" style={{ width: 38, height: 38, objectFit: "contain", mixBlendMode: "multiply" }} />
@@ -412,7 +414,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
         </div>
 
         {/* Huge Title */}
-        <div style={{ textAlign: "center", marginBottom: isDenseLayout ? 6 : 10, position: "relative", zIndex: 2 }}>
+        <div style={{ textAlign: "center", position: "relative", zIndex: 2, flexShrink: 0 }}>
           <div style={{ 
             fontSize: isDenseLayout ? 30 : 32, fontWeight: 900, letterSpacing: "0.08em", 
             background: `linear-gradient(135deg, ${AP_NAVY} 0%, ${cfg.accentDark} 100%)`, 
@@ -435,7 +437,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
         <div style={{
           background: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,1)", borderRadius: 12, padding: "6px 10px",
           display: "flex", alignItems: "center", gap: 6, boxShadow: "0 4px 12px rgba(0,0,0,0.06)", position: "relative", zIndex: 3, 
-          backdropFilter: "blur(12px)", marginBottom: isDenseLayout ? 6 : 8
+          backdropFilter: "blur(12px)", minHeight: isDenseLayout ? 56 : 64, flexShrink: 0
         }}>
           <div style={{ background: `linear-gradient(135deg, ${AP_NAVY}, ${cfg.accentDark})`, borderRadius: 8, padding: "5px 10px", color: "white", textAlign: "center", boxShadow: `0 4px 8px ${cfg.accent}40` }}>
             <div style={{ fontSize: 6, fontWeight: 700, opacity: 0.9, letterSpacing: "0.1em" }}>DATE</div>
@@ -467,11 +469,15 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
         </div>
 
         {/* Name & College Area */}
-        <div style={{ position: "relative", zIndex: 3, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: 0 }}>
+        <div style={{ position: "relative", zIndex: 3, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: 0, overflow: "hidden" }}>
           <div style={{ 
             background: "rgba(255,255,255,0.9)", borderRadius: 12, padding: isDenseLayout ? "10px 10px" : "18px 14px", 
             border: "1px solid rgba(255,255,255,1)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)", backdropFilter: "blur(12px)",
-            overflow: "hidden"
+            overflow: "hidden",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end"
           }}>
             {detailFields.map((field, index) => (
               <div
@@ -496,7 +502,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
         </div>
 
         {/* Website Line */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: isDenseLayout ? 6 : 8, position: "relative", zIndex: 3, justifyContent: "center", background: "rgba(248, 250, 252, 0.9)", padding: isDenseLayout ? "6px" : "8px", borderRadius: 10, border: "1px solid rgba(255,255,255,1)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, position: "relative", zIndex: 3, justifyContent: "center", background: "rgba(248, 250, 252, 0.9)", padding: isDenseLayout ? "6px" : "8px", borderRadius: 10, border: "1px solid rgba(255,255,255,1)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems:"center", justifyContent: "center", background: AP_NAVY, padding: "3px", borderRadius: 4 }}>
             <Map size={10} color="#fff" />
           </div>
@@ -588,79 +594,27 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
           </div>
         </div>
 
-        {/* Emergency/Contact Grid */}
-        <div style={{ marginTop: 10, position: "relative", zIndex: 3, display: "grid", gridTemplateColumns: "0.92fr 1.08fr", gap: 8 }}>
-          <div
-            style={{
-              background: "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88))",
-              border: "1px solid #fecdd3",
-              padding: "8px 8px 7px",
-              borderRadius: 14,
-              boxShadow: "0 8px 18px rgba(225,29,72,0.08)",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 7 }}>
-              <div style={{ background: "#ffe4e6", padding: 4, borderRadius: 7, border: "1px solid #fecdd3" }}>
-                <HeartPulse size={12} color="#e11d48" strokeWidth={2.5} />
-              </div>
-              <div style={{ fontSize: 8, fontWeight: 900, color: "#e11d48", letterSpacing: "0.06em" }}>EMERGENCY</div>
-            </div>
-
-            <div style={{ marginBottom: 5, border: "1px dashed #fecdd3", borderRadius: 8, padding: "4px 6px" }}>
-              <div style={{ fontSize: 6.8, color: "#be123c", fontWeight: 800, letterSpacing: "0.04em", marginBottom: 2 }}>BLOOD GROUP</div>
-              <div
-                style={{
-                  width: "100%",
-                  height: 12,
-                  borderBottom: "2px solid #cbd5e1",
-                  borderRadius: 1,
-                }}
-              />
-            </div>
-
-            <div style={{ border: "1px dashed #fecdd3", borderRadius: 8, padding: "4px 6px" }}>
-              <div style={{ fontSize: 6.8, color: "#be123c", fontWeight: 800, letterSpacing: "0.04em", marginBottom: 2 }}>EMERGENCY PHONE</div>
-              <div
-                style={{
-                  width: "100%",
-                  height: 12,
-                  borderBottom: "2px solid #cbd5e1",
-                  borderRadius: 1,
-                }}
-              />
-            </div>
+        {/* Quote Panel */}
+        <div
+          style={{
+            marginTop: 10,
+            position: "relative",
+            zIndex: 3,
+            background: "linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9))",
+            border: `1px solid ${cfg.accent}44`,
+            padding: "10px 11px",
+            borderRadius: 14,
+            boxShadow: `0 8px 18px ${cfg.accent}22`,
+          }}
+        >
+          <div style={{ fontSize: 8, fontWeight: 900, color: cfg.accentDark, letterSpacing: "0.08em", marginBottom: 5 }}>
+            INSPIRATION
           </div>
-
-          <div
-            style={{
-              background: "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88))",
-              border: `1px solid ${AP_NAVY}33`,
-              padding: "9px 10px 8px",
-              borderRadius: 14,
-              boxShadow: "0 8px 18px rgba(30,58,138,0.08)",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 7 }}>
-              <div style={{ background: `${AP_NAVY}20`, padding: 4, borderRadius: 7, border: `1px solid ${AP_NAVY}30` }}>
-                <Briefcase size={12} color={AP_NAVY} strokeWidth={2.5} />
-              </div>
-              <div style={{ fontSize: 9, fontWeight: 900, color: AP_NAVY, letterSpacing: "0.06em" }}>HELP DESK</div>
-            </div>
-
-            <div style={{ fontSize: 8.8, color: "#1e293b", fontWeight: 800, lineHeight: 1.45 }}>
-              +91 93919 05274
-            </div>
-            <div style={{
-              marginTop: 5,
-              fontSize: 7.8,
-              color: "#334155",
-              fontWeight: 700,
-              lineHeight: 1.4,
-              wordBreak: "break-word",
-              overflowWrap: "anywhere",
-            }}>
-              savishkarandhrapradesh@gmail.com
-            </div>
+          <div style={{ fontSize: 8.5, color: "#1f2937", lineHeight: 1.45, fontWeight: 700 }}>
+            "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action."
+          </div>
+          <div style={{ marginTop: 6, fontSize: 7.5, color: "#475569", fontWeight: 800, letterSpacing: "0.05em" }}>
+            - Dr. A.P.J. Abdul Kalam
           </div>
         </div>
 

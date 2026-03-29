@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+  import { useState, useRef, useCallback } from "react";
 import * as htmlToImage from "html-to-image";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -68,10 +68,11 @@ const specialCards: CardSpec[] = [
     role: "Organizing Committee",
     organization: "Committee Name",
     eventDate: "3-5 Apr 2026",
+    displayRoleLabel: "ORGANISATION COMMITTEE",
     showLeadersImage: true,
     fields: [
       { label: "NAME" },
-      { label: "COMMITTEE" },
+      { label: "ORGANISATION" },
       { label: "MOBILE NUMBER" },
     ],
   },
@@ -92,14 +93,15 @@ const specialCards: CardSpec[] = [
   {
     key: "Guest",
     role: "Guest",
-    organization: "Institute Name",
+    organization: "Guest Organisation",
     eventDate: "3-5 Apr 2026",
+    displayRoleLabel: "GUEST OF HONOUR",
     showLeadersImage: true,
     fields: [
       { label: "NAME" },
-      { label: "INSTITUTE" },
+      { label: "DESIGNATION" },
+      { label: "ORGANISATION" },
       { label: "MOBILE NUMBER" },
-      { label: "EVENT" },
     ],
   },
 ];
@@ -108,7 +110,7 @@ const roleAccents: Record<string, string> = {
   Delegate: "#2563eb",
   Participant: "#2563eb",
   Volunteer: "#65a30d",
-  "Organizing Committee": "#dc2626",
+  "Organizing Committee": "#7c3aed",
   "Sanchalana Samithi": "#9333ea",
   Jury: "#ca8a04",
   "Jury / Judge": "#ca8a04",
@@ -122,7 +124,7 @@ const roleLightBg: Record<string, string> = {
   Delegate: "#dbeafe",
   Participant: "#dbeafe",
   Volunteer: "#ecfccb",
-  "Organizing Committee": "#fee2e2",
+  "Organizing Committee": "#ede9fe",
   "Sanchalana Samithi": "#f3e8ff",
   Jury: "#fefce8",
   "Jury / Judge": "#fefce8",
