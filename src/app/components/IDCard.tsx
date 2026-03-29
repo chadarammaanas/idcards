@@ -7,22 +7,38 @@ import {
 } from "lucide-react";
 import srujanLogo from "../../../logo/Screenshot 2026-03-20 at 10-39-21 (104) WhatsApp.png";
 import apLogo from "../../../logo/WhatsApp Image 2026-03-20 at 10.35.58 AM.jpeg";
+import scientistImage from "../../assets/scientist.png";
+
+export interface IDCardField {
+  label: string;
+  value?: string;
+}
 
 export interface IDCardProps {
-  role: "Participant" | "Volunteer" | "Organizing Committee" | "Sanchalana Samithi" | "Jury / Judge" | "Guest" | "Speaker / Resource" | "Media / Photography" | "Technical Support" | string;
+  role: "Participant" | "Delegate" | "Volunteer" | "Organizing Committee" | "Sanchalana Samithi" | "Jury / Judge" | "Guest" | "Speaker / Resource" | "Media / Photography" | "Technical Support" | string;
   organization: string;
   idNumber: string;
   eventDate: string;
+  displayRoleLabel?: string;
+  fields?: IDCardField[];
+  showLeadersImage?: boolean;
 }
 
 const roleConfig: Record<string, any> = {
+  "Delegate": {
+    accent: "#2563eb",
+    accentLight: "#dbeafe",
+    accentMid: "#60a5fa",
+    accentDark: "#1e3a8a",
+    label: "DELEGATE",
+    gradient: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%)",
+  },
   "Participant": {
     accent: "#2563eb",
     accentLight: "#dbeafe",
     accentMid: "#60a5fa",
     accentDark: "#1e3a8a",
     label: "PARTICIPANT",
-    labelTelugu: "పాల్గొనేవారు",
     gradient: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%)",
   },
   "Volunteer": {
@@ -31,7 +47,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#a3e635",
     accentDark: "#365314",
     label: "VOLUNTEER",
-    labelTelugu: "స్వచ్ఛంద సేవకుడు",
     gradient: "linear-gradient(135deg, #3f6212 0%, #65a30d 50%, #84cc16 100%)",
   },
   "Organizing Committee": {
@@ -40,7 +55,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#f87171",
     accentDark: "#7f1d1d",
     label: "COMMITTEE",
-    labelTelugu: "నిర్వహణ కమిటీ",
     gradient: "linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #ef4444 100%)",
   },
   "Sanchalana Samithi": {
@@ -49,7 +63,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#c084fc",
     accentDark: "#581c87",
     label: "SANCHALANA",
-    labelTelugu: "సంచలన సమితి",
     gradient: "linear-gradient(135deg, #6b21a8 0%, #9333ea 50%, #a855f7 100%)",
   },
   "Jury / Judge": {
@@ -58,7 +71,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#facc15",
     accentDark: "#713f12",
     label: "JURY PANEL",
-    labelTelugu: "న్యాయ నిర్ణేత",
     gradient: "linear-gradient(135deg, #854d0e 0%, #ca8a04 50%, #eab308 100%)",
   },
   "Guest": {
@@ -67,7 +79,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#fbbf24",
     accentDark: "#78350f",
     label: "GUEST",
-    labelTelugu: "అతిథి",
     gradient: "linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%)",
   },
   "Speaker / Resource": {
@@ -76,7 +87,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#2dd4bf",
     accentDark: "#115e59",
     label: "SPEAKER",
-    labelTelugu: "వక్త",
     gradient: "linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%)",
   },
   "Media / Photography": {
@@ -85,7 +95,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#f472b6",
     accentDark: "#831843",
     label: "MEDIA TEAM",
-    labelTelugu: "మీడియా తీమ్",
     gradient: "linear-gradient(135deg, #9d174d 0%, #db2777 50%, #ec4899 100%)",
   },
   "Technical Support": {
@@ -94,7 +103,6 @@ const roleConfig: Record<string, any> = {
     accentMid: "#818cf8",
     accentDark: "#312e81",
     label: "TECH SUPPORT",
-    labelTelugu: "సాంకేతిక బృందం",
     gradient: "linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #6366f1 100%)",
   }
 };
@@ -327,8 +335,15 @@ const QRCode = ({ accent }: { accent: string }) => {
 };
 
 // ── FRONT OF CARD ──
-export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
-  const cfg = roleConfig[role];
+export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel, fields }) => {
+  const cfg = roleConfig[role] || roleConfig["Participant"];
+  const detailFields = fields && fields.length > 0
+    ? fields
+    : [
+        { label: "NAME" },
+        { label: "ORGANISATION" },
+      ];
+  const isDenseLayout = detailFields.length >= 5;
 
   return (
     <div
@@ -357,10 +372,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
         </div>
         <div style={{ textAlign: "center", padding: "10px 16px 14px", position: "relative", zIndex: 2 }}>
           <div style={{ color: "#ffffff", fontSize: 20, fontWeight: 900, letterSpacing: "0.25em", textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
-            {cfg.label}
-          </div>
-          <div style={{ color: "rgba(255,255,255,0.9)", fontSize: 11, fontWeight: 500, marginTop: 2, letterSpacing: "0.05em" }}>
-            {cfg.labelTelugu}
+            {displayRoleLabel || cfg.label}
           </div>
         </div>
       </div>
@@ -372,7 +384,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
       </div>
 
       {/* BODY */}
-      <div style={{ flex: 1, padding: "12px 18px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
+      <div style={{ flex: 1, padding: isDenseLayout ? "10px 14px" : "12px 18px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
         <RoleBackground role={role} color={cfg.accent} side="front" />
 
         {/* Logos & Event Theme */}
@@ -385,8 +397,9 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
             <img src={apLogo} alt="AP Saviskar" style={{ width: 38, height: 38, objectFit: "contain", mixBlendMode: "multiply" }} />
           </div>
           <div style={{ flex: 1, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ fontSize: 7, fontWeight: 800, color: "#475569", letterSpacing: "0.15em" }}>NATIONAL LEVEL</div>
-            <div style={{ fontSize: 7, fontWeight: 800, color: "#475569", letterSpacing: "0.15em", marginBottom: 2 }}>TECH FEST</div>
+            <div style={{ fontSize: 7, fontWeight: 800, color: "#475569", letterSpacing: "0.09em", marginBottom: 2 }}>
+              STATE-LEVEL INNOVATION & TECHNICAL FEST
+            </div>
             <div style={{ display: "flex", gap: 3, alignItems: "center" }}>
               <div style={{ width: 4, height: 4, borderRadius: "50%", background: AP_SAFFRON }}/>
               <div style={{ width: 12, height: 1.5, background: "#cbd5e1" }}/>
@@ -399,9 +412,9 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
         </div>
 
         {/* Huge Title */}
-        <div style={{ textAlign: "center", marginBottom: 10, position: "relative", zIndex: 2 }}>
+        <div style={{ textAlign: "center", marginBottom: isDenseLayout ? 6 : 10, position: "relative", zIndex: 2 }}>
           <div style={{ 
-            fontSize: 32, fontWeight: 900, letterSpacing: "0.08em", 
+            fontSize: isDenseLayout ? 30 : 32, fontWeight: 900, letterSpacing: "0.08em", 
             background: `linear-gradient(135deg, ${AP_NAVY} 0%, ${cfg.accentDark} 100%)`, 
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", 
             lineHeight: 1, fontFamily: 'system-ui, -apple-system, sans-serif',
@@ -422,7 +435,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
         <div style={{
           background: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,1)", borderRadius: 12, padding: "6px 10px",
           display: "flex", alignItems: "center", gap: 6, boxShadow: "0 4px 12px rgba(0,0,0,0.06)", position: "relative", zIndex: 3, 
-          backdropFilter: "blur(12px)", marginBottom: 8
+          backdropFilter: "blur(12px)", marginBottom: isDenseLayout ? 6 : 8
         }}>
           <div style={{ background: `linear-gradient(135deg, ${AP_NAVY}, ${cfg.accentDark})`, borderRadius: 8, padding: "5px 10px", color: "white", textAlign: "center", boxShadow: `0 4px 8px ${cfg.accent}40` }}>
             <div style={{ fontSize: 6, fontWeight: 700, opacity: 0.9, letterSpacing: "0.1em" }}>DATE</div>
@@ -433,30 +446,57 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
             <div style={{ fontSize: 7, fontWeight: 800, color: AP_SAFFRON, letterSpacing: "0.1em" }}>VENUE</div>
             <div style={{ fontSize: 9, fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>SVPEC, Visakhapatnam</div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 24, height: 24, background: `${AP_TEAL}15`, borderRadius: "50%" }}>
-            <MapPin size={12} color={AP_TEAL} strokeWidth={2.5}/>
+          <div
+            style={{
+              width: isDenseLayout ? 72 : 86,
+              height: isDenseLayout ? 46 : 56,
+              borderRadius: 8,
+              overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.95)",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
+              background: "#ffffff",
+              flexShrink: 0,
+            }}
+          >
+            <img
+              src={scientistImage}
+              alt="Leaders"
+              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+            />
           </div>
         </div>
 
         {/* Name & College Area */}
-        <div style={{ position: "relative", zIndex: 3, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ position: "relative", zIndex: 3, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: 0 }}>
           <div style={{ 
-            background: "rgba(255,255,255,0.9)", borderRadius: 12, padding: "18px 14px", 
-            border: "1px solid rgba(255,255,255,1)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)", backdropFilter: "blur(12px)"
+            background: "rgba(255,255,255,0.9)", borderRadius: 12, padding: isDenseLayout ? "10px 10px" : "18px 14px", 
+            border: "1px solid rgba(255,255,255,1)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)", backdropFilter: "blur(12px)",
+            overflow: "hidden"
           }}>
-            <div style={{ borderBottom: `2px solid ${cfg.accentLight}`, paddingBottom: 6, marginBottom: 8, display: "flex" }}>
-              <span style={{ fontSize: 8, fontWeight: 800, color: cfg.accentDark, width: 60, alignSelf:"flex-end" }}>NAME</span>
-              <span style={{ flex: 1, height:14 }}></span>
-            </div>
-            <div style={{ borderBottom: `2px solid ${cfg.accentLight}`, paddingBottom: 6, display: "flex" }}>
-              <span style={{ fontSize: 8, fontWeight: 800, color: cfg.accentDark, width: 60, alignSelf:"flex-end" }}>ORGANISATION</span>
-              <span style={{ flex: 1, height:14 }}></span>
-            </div>
+            {detailFields.map((field, index) => (
+              <div
+                key={`${field.label}-${index}`}
+                style={{
+                  borderBottom: `2px solid ${cfg.accentLight}`,
+                  paddingBottom: isDenseLayout ? 4 : 6,
+                  marginBottom: index === detailFields.length - 1 ? 0 : isDenseLayout ? 5 : 8,
+                  display: "flex",
+                  minHeight: isDenseLayout ? 15 : 20,
+                }}
+              >
+                <span style={{ fontSize: isDenseLayout ? 7.2 : 8, fontWeight: 800, color: cfg.accentDark, width: isDenseLayout ? 76 : 88, alignSelf: "flex-end", lineHeight: isDenseLayout ? "10px" : "12px" }}>
+                  {field.label}
+                </span>
+                <span style={{ flex: 1, height: isDenseLayout ? 12 : 14, fontSize: isDenseLayout ? 8 : 9, color: "#0f172a", fontWeight: 700, lineHeight: isDenseLayout ? "12px" : "14px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  {field.value || ""}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Website Line */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8, position: "relative", zIndex: 3, justifyContent: "center", background: "rgba(248, 250, 252, 0.9)", padding: "8px", borderRadius: 10, border: "1px solid rgba(255,255,255,1)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: isDenseLayout ? 6 : 8, position: "relative", zIndex: 3, justifyContent: "center", background: "rgba(248, 250, 252, 0.9)", padding: isDenseLayout ? "6px" : "8px", borderRadius: 10, border: "1px solid rgba(255,255,255,1)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
           <div style={{ display: "flex", alignItems:"center", justifyContent: "center", background: AP_NAVY, padding: "3px", borderRadius: 4 }}>
             <Map size={10} color="#fff" />
           </div>
@@ -477,7 +517,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber }) => {
 
 // ── BACK OF CARD ──
 export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
-  const cfg = roleConfig[role];
+  const cfg = roleConfig[role] || roleConfig["Participant"];
 
   return (
     <div
