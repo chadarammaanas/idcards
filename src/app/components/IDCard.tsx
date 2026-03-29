@@ -3,7 +3,7 @@ import {
   ClipboardCheck, Users, Headphones, GitMerge, Megaphone, Activity, 
   ListTodo, Network, Share2, Presentation, Lightbulb, Hexagon, 
   Award, Mic, Crown, Sparkles, MapPin, CalendarDays, Tent, Flag, 
-  Briefcase, HeartPulse, Zap, Map
+  Briefcase, HeartPulse, Zap, Globe, Instagram
 } from "lucide-react";
 import srujanLogo from "../../../logo/Screenshot 2026-03-20 at 10-39-21 (104) WhatsApp.png";
 import apLogo from "../../../logo/WhatsApp Image 2026-03-20 at 10.35.58 AM.jpeg";
@@ -198,9 +198,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Participant") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(215px, ${isFront ? 304 : 102}px)`, display: "block", position: "absolute" }}><Hexagon size={108} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-6px, ${isFront ? 266 : 358}px)`, display: "block", position: "absolute" }}><Network size={124} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(165px, ${isFront ? 84 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={78} color={color} strokeWidth={1.5} /></g>
+        <div style={{ transform: `translate(215px, ${isFront ? 304 : 102}px)`, display: "block", position: "absolute" }}><Hexagon size={108} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-6px, ${isFront ? 266 : 358}px)`, display: "block", position: "absolute" }}><Network size={124} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(165px, ${isFront ? 84 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={78} color={color} strokeWidth={1.5} /></div>
       </div>
     );
   }
@@ -208,9 +208,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Volunteer") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(210px, ${isFront ? 316 : 88}px)`, display: "block", position: "absolute" }}><Users size={106} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-10px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><HeartPulse size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(162px, ${isFront ? 70 : 382}px)`, display: "block", position: "absolute" }}><Flag size={74} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(210px, ${isFront ? 316 : 88}px)`, display: "block", position: "absolute" }}><Users size={106} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-10px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><HeartPulse size={118} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(162px, ${isFront ? 70 : 382}px)`, display: "block", position: "absolute" }}><Flag size={74} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -218,9 +218,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Organizing Committee") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 322 : 78}px)`, display: "block", position: "absolute" }}><Network size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-18px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.5} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 322 : 78}px)`, display: "block", position: "absolute" }}><Network size={102} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-18px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={118} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.5} /></div>
       </div>
     );
   }
@@ -228,9 +228,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Sanchalana Samithi") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 324 : 82}px)`, display: "block", position: "absolute" }}><Activity size={104} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-20px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><GitMerge size={122} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(168px, ${isFront ? 72 : 386}px)`, display: "block", position: "absolute" }}><ListTodo size={72} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 324 : 82}px)`, display: "block", position: "absolute" }}><Activity size={104} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-20px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><GitMerge size={122} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(168px, ${isFront ? 72 : 386}px)`, display: "block", position: "absolute" }}><ListTodo size={72} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -238,9 +238,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Jury / Judge") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 320 : 76}px)`, display: "block", position: "absolute" }}><Award size={100} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-10px, ${isFront ? 286 : 365}px)`, display: "block", position: "absolute" }}><Briefcase size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 320 : 76}px)`, display: "block", position: "absolute" }}><Award size={100} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-10px, ${isFront ? 286 : 365}px)`, display: "block", position: "absolute" }}><Briefcase size={118} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(166px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -248,9 +248,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Guest") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 320 : 66}px)`, display: "block", position: "absolute" }}><Crown size={102} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(8px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><Award size={114} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(164px, ${isFront ? 66 : 382}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 320 : 66}px)`, display: "block", position: "absolute" }}><Crown size={102} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(8px, ${isFront ? 286 : 364}px)`, display: "block", position: "absolute" }}><Award size={114} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(164px, ${isFront ? 66 : 382}px)`, display: "block", position: "absolute" }}><Sparkles size={74} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -258,9 +258,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Speaker / Resource") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Mic size={98} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={122} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(168px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Headphones size={70} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Mic size={98} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Presentation size={122} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(168px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Headphones size={70} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -268,9 +268,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Media / Photography") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Activity size={98} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><MapPin size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Zap size={70} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Activity size={98} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><MapPin size={118} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Zap size={70} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -278,9 +278,9 @@ const RoleBackground = ({ role, color, side }: { role: string; color: string; si
   if (role === "Technical Support") {
     return (
       <div style={{ position: "absolute", inset: 0, opacity: opac, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-        <g style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Map size={96} color={color} strokeWidth={1} style={iconStyle} /></g>
-        <g style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Network size={118} color={color} strokeWidth={1} /></g>
-        <g style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={70} color={color} strokeWidth={1.6} /></g>
+        <div style={{ transform: `translate(212px, ${isFront ? 320 : 82}px)`, display: "block", position: "absolute" }}><Zap size={96} color={color} strokeWidth={1} style={iconStyle} /></div>
+        <div style={{ transform: `translate(-12px, ${isFront ? 286 : 366}px)`, display: "block", position: "absolute" }}><Network size={118} color={color} strokeWidth={1} /></div>
+        <div style={{ transform: `translate(164px, ${isFront ? 70 : 384}px)`, display: "block", position: "absolute" }}><Lightbulb size={70} color={color} strokeWidth={1.6} /></div>
       </div>
     );
   }
@@ -407,6 +407,11 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
               <div style={{ width: 12, height: 1.5, background: "#cbd5e1" }}/>
               <div style={{ width: 4, height: 4, borderRadius: "50%", background: AP_TEAL }}/>
             </div>
+
+            <div style={{ fontSize: 7, fontWeight: 800, color: "#475569", letterSpacing: "0.09em", marginBottom: 2 }}>
+              KNOWLEDGE - CHARACTER - UNITY
+            </div>
+
           </div>
           <div style={{ padding: 2, background: "#fff", borderRadius: 8, boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }}>
             <img src={srujanLogo} alt="Srujana" style={{ width: 38, height: 38, objectFit: "contain" }} />
@@ -504,7 +509,7 @@ export const IDCard: React.FC<IDCardProps> = ({ role, idNumber, displayRoleLabel
         {/* Website Line */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, position: "relative", zIndex: 3, justifyContent: "center", background: "rgba(248, 250, 252, 0.9)", padding: isDenseLayout ? "6px" : "8px", borderRadius: 10, border: "1px solid rgba(255,255,255,1)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems:"center", justifyContent: "center", background: AP_NAVY, padding: "3px", borderRadius: 4 }}>
-            <Map size={10} color="#fff" />
+            <Globe size={10} color="#fff" />
           </div>
           <span style={{ fontSize: 9.5, fontWeight: 800, color: AP_NAVY, letterSpacing: "0.1em" }}>SRUJANA2026.IN</span>
           <div style={{ width: 5, height: 5, borderRadius: "50%", background: cfg.accent, boxShadow: `0 0 6px ${cfg.accent}` }} />
@@ -618,13 +623,20 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
           </div>
 
           <div style={{ marginTop: 8, height: 1, background: `${cfg.accent}33` }} />
-          <div style={{ marginTop: 7, display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ marginTop: 7, display: "flex", alignItems: "center", gap: 7 }}>
             <div style={{ background: `${cfg.accent}1f`, border: `1px solid ${cfg.accent}33`, borderRadius: 6, padding: 3, display: "flex" }}>
               <HeartPulse size={11} color={cfg.accentDark} strokeWidth={2.4} />
             </div>
             <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: 7, color: cfg.accentDark, fontWeight: 900, letterSpacing: "0.06em" }}>HELP / EMERGENCY</div>
-              <div style={{ fontSize: 8.2, color: "#1e293b", fontWeight: 800 }}>+91 93919 05274</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, whiteSpace: "nowrap", marginTop: 2 }}>
+                <div style={{ fontSize: 8, lineHeight: "10px", color: "#1e293b", fontWeight: 800 }}>+91 93919 05274</div>
+                <div style={{ width: 1, height: 10, background: `${cfg.accent}44` }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 4, color: "#1e293b" }}>
+                  <Instagram size={10} color={cfg.accentDark} strokeWidth={2.2} />
+                  <span style={{ fontSize: 8, lineHeight: "10px", fontWeight: 800 }}>@savishkar_ap</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
