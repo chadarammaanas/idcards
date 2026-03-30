@@ -8,6 +8,7 @@ import {
 import srujanLogo from "../../../logo/Screenshot 2026-03-20 at 10-39-21 (104) WhatsApp.png";
 import apLogo from "../../../logo/WhatsApp Image 2026-03-20 at 10.35.58 AM.jpeg";
 import scientistImage from "../../assets/scientist.png";
+import qrCodeImage from "../../assets/qr-code.jpeg";
 
 export interface IDCardField {
   label: string;
@@ -551,15 +552,15 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
         <div style={{ width: 44, height: 12, borderRadius: 20, background: "rgba(255,255,255,0.7)", border: "1px solid rgba(0,0,0,0.1)", boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }} />
       </div>
 
-      <div style={{ flex: 1, padding: "8px 16px 10px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
+      <div style={{ flex: 1, padding: "10px 16px", display: "flex", flexDirection: "column", position: "relative", zIndex: 2 }}>
         <RoleBackground role={role} color={cfg.accent} side="back" />
         
         {/* Info Box */}
         <div style={{ 
           textAlign: "center", position: "relative", zIndex: 3, 
-          background: "rgba(255,255,255,0.85)", padding: "14px", borderRadius: 16, 
+          background: "rgba(255,255,255,0.85)", padding: "12px", borderRadius: 16, 
           border: "1px solid rgba(255,255,255,1)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)", 
-          backdropFilter: "blur(12px)", marginBottom: 10 
+          backdropFilter: "blur(12px)", marginBottom: 8 
         }}>
           <div style={{ display:"inline-flex", alignItems: "center", gap: 6, background: `linear-gradient(135deg, ${AP_SAFFRON}, #d97706)`, color: "#fff", padding: "4px 10px", borderRadius: 20, fontSize: 7.5, fontWeight: 800, letterSpacing: "0.1em", marginBottom: 8, boxShadow: "0 4px 12px rgba(232, 144, 42, 0.3)" }}>
             <Award size={10} strokeWidth={3} /> PRIZE POOL: ₹2 LAKHS
@@ -578,10 +579,10 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
 
         {/* QR Section */}
         <div style={{ 
-          flex: "0 0 auto", minHeight: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", 
+          flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", 
           position: "relative", zIndex: 3, background: `linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)`, 
           borderRadius: 16, border: `1px solid rgba(255,255,255,0.8)`, boxShadow: `0 4px 16px ${cfg.accent}15`,
-          backdropFilter: "blur(8px)", padding: "8px 0"
+          backdropFilter: "blur(8px)", padding: "12px"
         }}>
           <div style={{ fontSize: 10.5, fontWeight: 800, color: cfg.accentDark, letterSpacing: "0.15em", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
             <div style={{ width: 8, height: 2, background: cfg.accentDark, borderRadius: 2 }} />
@@ -589,8 +590,8 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
             <div style={{ width: 8, height: 2, background: cfg.accentDark, borderRadius: 2 }} />
           </div>
 
-          <div style={{ background: "#ffffff", padding: 10, borderRadius: 14, boxShadow: `0 12px 32px ${cfg.accent}30`, border: `2px solid ${cfg.accent}30` }}>
-            <QRCode accent={AP_NAVY} />
+          <div style={{ background: "#ffffff", padding: 8, borderRadius: 14, boxShadow: `0 12px 32px ${cfg.accent}30`, border: `2px solid ${cfg.accent}30` }}>
+            <img src={qrCodeImage} alt="QR Code" style={{ width: 74, height: 74, display: "block", borderRadius: 4 }} />
           </div>
           
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10, background: "#ffffff", padding: "5px 12px", borderRadius: 12, border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
@@ -602,12 +603,12 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
         {/* Quote Panel */}
         <div
           style={{
-            marginTop: 10,
+            marginTop: 8,
             position: "relative",
             zIndex: 3,
             background: "linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9))",
             border: `1px solid ${cfg.accent}44`,
-            padding: "10px 11px",
+            padding: "8px 10px",
             borderRadius: 14,
             boxShadow: `0 8px 18px ${cfg.accent}22`,
           }}
@@ -618,12 +619,12 @@ export const IDCardBack: React.FC<IDCardProps> = ({ role, idNumber }) => {
           <div style={{ fontSize: 8.5, color: "#1f2937", lineHeight: 1.45, fontWeight: 700 }}>
             "If you want to shine like a sun, first burn like a sun"
           </div>
-          <div style={{ marginTop: 6, fontSize: 7.5, color: "#475569", fontWeight: 800, letterSpacing: "0.05em" }}>
+          <div style={{ marginTop: 4, fontSize: 7.5, color: "#475569", fontWeight: 800, letterSpacing: "0.05em" }}>
             - Dr. A.P.J. Abdul Kalam
           </div>
 
-          <div style={{ marginTop: 8, height: 1, background: `${cfg.accent}33` }} />
-          <div style={{ marginTop: 7, display: "flex", alignItems: "center", gap: 7 }}>
+          <div style={{ marginTop: 6, height: 1, background: `${cfg.accent}33` }} />
+          <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 6 }}>
             <div style={{ background: `${cfg.accent}1f`, border: `1px solid ${cfg.accent}33`, borderRadius: 6, padding: 3, display: "flex" }}>
               <HeartPulse size={11} color={cfg.accentDark} strokeWidth={2.4} />
             </div>

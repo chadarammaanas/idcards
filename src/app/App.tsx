@@ -182,12 +182,12 @@ const DownloadableCard = ({ card, index }: { card: CardSpec; index: number }) =>
 
   return (
     <div className="flex flex-col gap-4 sm:gap-6 items-center p-4 sm:p-6 bg-white rounded-xl sm:rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center w-full">
-        <div className="flex flex-col gap-2 sm:gap-3 flex-1 sm:flex-none">
-          <div className="relative group">
+      <div className="flex flex-wrap gap-4 sm:gap-8 justify-center w-full">
+        <div className="flex flex-col gap-2 sm:gap-3 shrink-0">
+          <div className="relative group shrink-0">
             <div
               ref={cardRefFront}
-              className="bg-white rounded-xl sm:rounded-2xl p-0 shadow-lg"
+              className="shrink-0"
               data-export-id={`${exportPrefix}-front`}
             >
               <IDCard
@@ -209,11 +209,11 @@ const DownloadableCard = ({ card, index }: { card: CardSpec; index: number }) =>
           </button>
         </div>
 
-        <div className="flex flex-col gap-2 sm:gap-3 flex-1 sm:flex-none">
-          <div className="relative group">
+        <div className="flex flex-col gap-2 sm:gap-3 shrink-0">
+          <div className="relative group shrink-0">
             <div
               ref={cardRefBack}
-              className="bg-white rounded-xl sm:rounded-2xl p-0 shadow-lg"
+              className="shrink-0"
               data-export-id={`${exportPrefix}-back`}
             >
               <IDCardBack
@@ -420,7 +420,7 @@ function App() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {filteredCards.map((card, index) => (
             <DownloadableCard key={`${card.key}-${index}`} card={card} index={index} />
           ))}
